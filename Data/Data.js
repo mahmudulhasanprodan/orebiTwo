@@ -157,4 +157,43 @@ export const SpecialOffersData = [
   },
 ];
 
+export const CategoriesData = [
+  {
+    id: 1,
+    title: "Mobile",
+    subcategoris: [
+      { id: 1, title: "Oppo" },
+      { id: 2, title: "Vivo" },
+      { id: 3, title: "Realme" },
+      { id: 4, title: "Samsung" },
+      { id: 5, title: "Techno" },
+      { id: 6, title: "Nokia" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Accesories",
+    subcategoris: [],
+  },
+  {
+    id: 3,
+    title: "Electronic",
+    subcategoris: [
+      { id: 1, title: "Television" },
+      { id: 2, title: "Radio" },
+      { id: 3, title: "Freze" },
+    ],
+  },
+  {
+    id: 4,
+    title: "Cloths",
+    subcategoris: [],
+  },
+  {
+    id: 4,
+    title: "Men Fasion",
+    subcategoris: [],
+  },
+];
+
 

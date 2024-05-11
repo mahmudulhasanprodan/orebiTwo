@@ -7,7 +7,7 @@ import Flex from '../Flex/Flex';
 const ArrivalCommon = ({Image, Colorvarient, baze, ProductName,Price}) => {
   return (
     <>
-      <div className="w-[95%] py-8 m-auto">
+      <div className="w-[95%] py-24 m-auto">
         <div className="relative overflow-hidden group cursor-pointer">
           <div className="absolute left-5 top-5">{baze}</div>
           <picture>

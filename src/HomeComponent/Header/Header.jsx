@@ -22,7 +22,7 @@ const Header = () => {
                 }
               >
                 <NavLink
-                  to={"/home"}
+                  to={"/"}
                   className={"active:text-black active:font-bold"}
                 >
                   Home

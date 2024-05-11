@@ -1,5 +1,8 @@
 import React from 'react'
 import Home from './Pages/Home/Home'
+import RootElement from './CommonComponent/RootElement/RootElement';
+import Shop from './Pages/Shop/Shop';
+
 
 import {
   createBrowserRouter,
@@ -10,8 +13,9 @@ import {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Home />}>
-      <Route></Route>
+    <Route path="/" element={<RootElement />}>
+      <Route index element={<Home />}></Route>
+      <Route path="/Shop" element={<Shop />}></Route>
     </Route>
   )
 );
