@@ -47,15 +47,15 @@ const Banner = () => {
                 width: "30px",
                 cursor: "pointer",
                 color: "#000",
-                padding: "30px 0px",
-                borderRight: "3px solid #262626",
+                padding: "25px 0px",
+                borderRight: "2px solid #262626",
                 
               }: {
                 width: "30px",
                 cursor: "pointer",
                 color: "#000",
-                padding: "30px 0px",
-                borderRight: "3px solid #fff",
+                padding: "25px 0px",
+                borderRight: "2px solid #fff",
               }}
             >
               0{i + 1}
@@ -71,22 +71,22 @@ const Banner = () => {
        <Slider {...settings}>
         <div>
             <picture>
-                <img src={BannerImg} alt={BannerImg} className="w-full"/>
+                <img src={BannerImg} alt={BannerImg}/>
             </picture>
         </div>
         <div>
             <picture>
-                <img src={BannerImg} alt={BannerImg} className="w-full"/>
+                <img src={BannerImg} alt={BannerImg}/>
             </picture>
         </div>
         <div>
             <picture>
-                <img src={BannerImg} alt={BannerImg} className="w-full"/>
+                <img src={BannerImg} alt={BannerImg}/>
             </picture>
         </div>
         <div>
             <picture>
-                <img src={BannerImg} alt={BannerImg} className="w-full"/>
+                <img src={BannerImg} alt={BannerImg}/>
             </picture>
         </div>
       </Slider>

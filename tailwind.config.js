@@ -20,9 +20,10 @@ export default {
         BtnColor: "var(--BtnColor)",
         MainfontColor: "var(--MainfontColor)",
         FooterColor: "var(--FooterColor)",
-        CommonColor: "var(--BtnColor)",
+        CommonColor: "var(--CommonColor)",
         MenuTextColor: "var(--MenuTextColor)",
         MenuBgColor: "var(--MenuBgColor)",
+        textTwoColor: "var(--textTwoColor)",
       },
 
     },
