@@ -1,10 +1,22 @@
 
+// Arrival Image part Here
+
 import ImageOne from "../src/assets/HomeComponentPic/ArrivalPicone.png"
 import ImageTwo from "../src/assets/HomeComponentPic/ArrivalPictwo.png"
 import ImageThree from "../src/assets/HomeComponentPic/ArrivalPicthree.png"
 import ImageFour from "../src/assets/HomeComponentPic/ArrivalPicfour.png"
 
+// Bestseller Image part Here
+import Imgone from "../src/assets/HomeComponentPic/Bestsellerone.png"
+import Imatwo from "../src/assets/HomeComponentPic/Bestsellertwo.png"
+import Imgthree from "../src/assets/HomeComponentPic/Bestsellerthree.png"
+import Imgfour from "../src/assets/HomeComponentPic/Bestsellertfour.png"
 
+//Special Offers Image Part Here
+import Img1 from "../src/assets/HomeComponentPic/Speacialone.png"
+import Img2 from "../src/assets/HomeComponentPic/Speacialtwo.png"
+import Img3 from "../src/assets/HomeComponentPic/Speacialthree.png"
+import Img4 from "../src/assets/HomeComponentPic/Speacialfour.png"
 
 
 export const ArrivalData = [
@@ -56,18 +68,18 @@ export const ArrivalData = [
 export const BestSellerData = [
   {
     id: 1,
-    img: ImageOne,
+    img: Imgone,
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
-    color: false,
-    bazeitem: false,
+    color: true,
+    bazeitem: true,
     discount: "10%",
   },
 
   {
     id: 2,
-    img: ImageTwo,
+    img: Imatwo,
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
@@ -78,7 +90,7 @@ export const BestSellerData = [
 
   {
     id: 3,
-    img: ImageThree,
+    img: Imgthree,
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
@@ -89,7 +101,7 @@ export const BestSellerData = [
 
   {
     id: 4,
-    img: ImageFour,
+    img: Imgfour,
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
@@ -98,4 +110,51 @@ export const BestSellerData = [
     discount: "10%",
   },
 ];
+
+export const SpecialOffersData = [
+  {
+    id: 1,
+    img: Img1,
+    baze: true,
+    title: "Basic Crew Neck Tee",
+    price: "$44.00",
+    color: true,
+    bazeitem: true,
+    discount: "10%",
+  },
+
+  {
+    id: 2,
+    img: Img2,
+    baze: true,
+    title: "Basic Crew Neck Tee",
+    price: "$44.00",
+    color: true,
+    bazeitem: true,
+    discount: "10%",
+  },
+
+  {
+    id: 3,
+    img: Img3,
+    baze: true,
+    title: "Basic Crew Neck Tee",
+    price: "$44.00",
+    color: true,
+    bazeitem: true,
+    discount: "10%",
+  },
+
+  {
+    id: 4,
+    img: Img4,
+    baze: true,
+    title: "Basic Crew Neck Tee",
+    price: "$44.00",
+    color: true,
+    bazeitem: true,
+    discount: "10%",
+  },
+];
+
 

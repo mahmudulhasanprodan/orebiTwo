@@ -24,6 +24,7 @@ export default {
         MenuTextColor: "var(--MenuTextColor)",
         MenuBgColor: "var(--MenuBgColor)",
         textTwoColor: "var(--textTwoColor)",
+        phoneColor: "var(--phoneColor)",
       },
 
     },
