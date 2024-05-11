@@ -3,6 +3,9 @@ import ArrivalCommon from '../../CommonComponent/ArrivalCommon/ArrivalCommon'
 import Button from '../../CommonComponent/Button/Button'
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
+import { FaLongArrowAltLeft } from "react-icons/fa";
+import { FaLongArrowAltRight } from "react-icons/fa";
+
 
 //Custom Arrow Function
 function SampleNextArrow(props) {
@@ -10,9 +13,25 @@ function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "red", position:"absolute"}}
+      style={{
+        ...style,
+        display: "block",
+        background: "#979797",
+        position: "absolute",
+        width: "40px",
+        height: "40px",
+        top: "50%",
+        left: "-8px",
+        transform: "translateY(-160%)",
+        cursor: "pointer",
+        borderRadius: "50%",
+      }}
       onClick={onClick}
-    />
+    >
+      <div className="absolute left-1/2 -translate-x-2/4 top-1/2 -translate-y-2/4 text-white">
+        <FaLongArrowAltLeft />
+      </div>
+    </div>
   );
 }
 
@@ -21,9 +40,26 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "green" }}
+      style={{
+        ...style,
+        display: "block",
+        background: "#979797",
+        position: "absolute",
+        width: "40px",
+        height: "40px",
+        top: "50%",
+        right: "-8px",
+        transform: "translateY(-160%)",
+        cursor: "pointer",
+        borderRadius: "50%",
+        zIndex: 1,
+      }}
       onClick={onClick}
-    />
+    >
+      <div className="absolute left-1/2 -translate-x-2/4 top-1/2 -translate-y-2/4 text-white">
+        <FaLongArrowAltRight />
+      </div>
+    </div>
   );
 }
 //Custom Arrow Function

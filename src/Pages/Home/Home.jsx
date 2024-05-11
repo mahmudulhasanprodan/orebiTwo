@@ -17,9 +17,9 @@ const Home = () => {
       <Shipping />
       <Offer />
       <Arrival HeadingTitle={"New Arrivals"} Pdata={ArrivalData}/>
-      {/* <Arrival HeadingTitle={"Our Best Sellers"} Pdata={BestSellerData}/> */}
-      {/* <Phone /> */}
-      {/* <Arrival HeadingTitle={"Special Offers"} Pdata={SpecialOffersData}/> */}
+      <Arrival HeadingTitle={"Our Best Sellers"} Pdata={BestSellerData}/>
+      <Phone />
+      <Arrival HeadingTitle={"Special Offers"} Pdata={SpecialOffersData}/>
     </>
   );
 }
