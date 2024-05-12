@@ -80,7 +80,7 @@ const [Alldata, setAlldata] = useState(Pdata);
 
   return (
     <>
-      <div>
+      <div className="py-20">
         <div className="container">
           <div className="py-12">
             <h2 className="font-DMsans font-bold text-3xl">
@@ -95,7 +95,7 @@ const [Alldata, setAlldata] = useState(Pdata);
                     ProductName={item.title}
                     Price={item.price}
                     Image={item.img}
-                    Colorvarient={item.color === true ? true : false}
+                    Colorvarient={item.color}
                     baze={
                       item.baze === true ? (
                         <Button

@@ -4,9 +4,9 @@ import Flex from '../../CommonComponent/Flex/Flex';
 
 
 
-const ShopColor = ({AllcolorData, ColotTitle, ColorCode}) => {
+const ShopColor = ({AllcolorData, ColotTitle, ColorCode, icon, Dropexpand}) => {
 
-    const [ShowColor,setShowColor] = useState(false);
+    const [ShowColor,setShowColor] = useState(Dropexpand);
   // HandleColor function start here
   const HandleColor = () => {
     setShowColor(!ShowColor);
@@ -20,11 +20,16 @@ const ShopColor = ({AllcolorData, ColotTitle, ColorCode}) => {
             <h2 className="font-DMsans font-bold text-xl">
               {ColotTitle ? ColotTitle : "No Titile"}
             </h2>
-            {ShowColor ? (
-              <IoIosArrowUp className="cursor-pointer text-green-700" />
-            ) : (
-              <IoIosArrowDown className="cursor-pointer" />
+            {icon && (
+                 <div>
+                 {ShowColor ? (
+                    <IoIosArrowUp className="cursor-pointer text-green-700" />
+                  ) : (
+                    <IoIosArrowDown className="cursor-pointer" />
+                  )}
+                 </div>
             )}
+          
           </Flex>
         </div>
         {ShowColor && (

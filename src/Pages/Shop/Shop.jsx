@@ -15,8 +15,8 @@ const Shop = () => {
                 <BreadCrumb />
             </div>
             <div className="flex">
-                <ShopLeft className="w-[25%] h-[100vh]"/>
-                <ShopRight className="w-[75%] bg-green-300 h-[100vh]"/>
+                <ShopLeft className="w-[25%]"/>
+                <ShopRight className="w-[75%] ml-5 border-2 border-gray-200"/>
             </div>
         </div>
       </div>

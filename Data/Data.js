@@ -26,7 +26,7 @@ export const ArrivalData = [
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
-    color: false,
+    color: "Black",
     bazeitem: false,
     discount: "10%",
   },
@@ -37,7 +37,7 @@ export const ArrivalData = [
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
-    color: true,
+    color: "Black",
     bazeitem: true,
     discount: "10%",
   },
@@ -48,7 +48,7 @@ export const ArrivalData = [
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
-    color: true,
+    color: "Black",
     bazeitem: true,
     discount: "10%",
   },
@@ -59,7 +59,7 @@ export const ArrivalData = [
     baze: true,
     title: "Basic Crew Neck Tee",
     price: "$44.00",
-    color: true,
+    color: "Black",
     bazeitem: true,
     discount: "10%",
   },
@@ -211,5 +211,33 @@ export const ShopBrandData = [
   { id: 4, title: "Lenevo" },
   { id: 5, title: "Tushiba" },
 ];
+
+export const ShopPriceData = [
+  { id: 1, title: "$0.00 - $9.99" },
+  { id: 2, title: "$10.00 - $19.99" },
+  { id: 3, title: "$20.00 - $29.99" },
+  { id: 4, title: "$30.00 - $39.99" },
+  { id: 5, title: "$40.00 - $69.99" },
+];
+
+export const DropdownData = [
+  { id: 1, product: "Feature" },
+  { id: 1, product: "Cloths" },
+  { id: 1, product: "Sunglass" },
+  { id: 1, product: "Fasion" },
+  { id: 1, product: "Men Fasion" },
+
+];
+
+export const DropdownShowData = [
+  { id: 1, product: 30 },
+  { id: 1, product: 10 },
+  { id: 1, product: 20 },
+  { id: 1, product: 40 },
+  { id: 1, product: 25 },
+
+];
+
+
 
 
