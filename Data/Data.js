@@ -204,4 +204,12 @@ export const ShopColorData = [
   { id: 5, color: "#15CBA5", title: "Blue" },
 ];
 
+export const ShopBrandData = [
+  { id: 1, title: "HP" },
+  { id: 2, title: "Dell" },
+  { id: 3, title: "Asus" },
+  { id: 4, title: "Lenevo" },
+  { id: 5, title: "Tushiba" },
+];
+
 

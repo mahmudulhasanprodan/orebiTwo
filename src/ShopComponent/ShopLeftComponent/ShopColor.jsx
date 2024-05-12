@@ -4,7 +4,7 @@ import Flex from '../../CommonComponent/Flex/Flex';
 
 
 
-const ShopColor = ({AllcolorData, ColotTitle}) => {
+const ShopColor = ({AllcolorData, ColotTitle, ColorCode}) => {
 
     const [ShowColor,setShowColor] = useState(false);
   // HandleColor function start here
@@ -21,7 +21,7 @@ const ShopColor = ({AllcolorData, ColotTitle}) => {
               {ColotTitle ? ColotTitle : "No Titile"}
             </h2>
             {ShowColor ? (
-              <IoIosArrowUp className="cursor-pointer" />
+              <IoIosArrowUp className="cursor-pointer text-green-700" />
             ) : (
               <IoIosArrowDown className="cursor-pointer" />
             )}
@@ -31,10 +31,13 @@ const ShopColor = ({AllcolorData, ColotTitle}) => {
           <div>
             {AllcolorData?.map((item) => (
               <Flex className={"items-center gap-x-4 pt-6 cursor-pointer"}>
-                <div
-                  className="h-[11px] w-[11px] rounded-full"
-                  style={{ backgroundColor: `${item.color}` }}
-                ></div>
+                {ColorCode && (
+                  <div
+                    className="h-[11px] w-[11px] rounded-full"
+                    style={{ backgroundColor: `${item.color}` }}
+                  ></div>
+                )}
+
                 <div>
                   <h2 className="font-DMsans font-normal text-base text-MenuTextColor">
                     {item.title}
