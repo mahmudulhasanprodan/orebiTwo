@@ -196,4 +196,12 @@ export const CategoriesData = [
   },
 ];
 
+export const ShopColorData = [
+  { id: 1, color: "#000000", title: "Black" },
+  { id: 2, color: "#FF8686", title: "Pink" },
+  { id: 3, color: "#7ED321", title: "Green" },
+  { id: 4, color: "#B6B6B6", title: "Offwhite" },
+  { id: 5, color: "#15CBA5", title: "Blue" },
+];
+
 
