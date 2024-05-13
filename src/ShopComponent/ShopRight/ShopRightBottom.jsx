@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ArrivalCommon from "../../CommonComponent/ArrivalCommon/ArrivalCommon"
 import Button from "../../CommonComponent/Button/Button"
 import axios from 'axios'
 import Flex from '../../CommonComponent/Flex/Flex'
+import {ShopRightContex} from "../ShopRightComponet/ShopRight"
 
 const ShopRightBottom = () => {
 const [AllData, setAllData] = useState([]);
 const [page,setpage] = useState(1);
+const ShowPageData = useContext(ShopRightContex);
+
 
     useEffect(() => {
       const ProductDataFetcher = async () => {
@@ -26,7 +29,7 @@ const [page,setpage] = useState(1);
     <>
       <div>
         <div className="flex flex-wrap">
-          {AllData?.slice(page * 9 - 9, page * 9).map((ProductData) => (
+          {AllData?.slice(page * ShowPageData - ShowPageData, page * ShowPageData).map((ProductData) => (
             <div className="py-10 w-[33%]" key={ProductData.id}>
               <ArrivalCommon
                 Image={ProductData.thumbnail}
@@ -51,7 +54,7 @@ const [page,setpage] = useState(1);
           <div>
             <ul>
               <li className="flex items-center gap-x-2 cursor-pointer">
-                {[...new Array(Math.floor(AllData.length / 9) + 1)].map(
+                {[...new Array(Math.floor(AllData.length / ShowPageData) + 1)].map(
                   (item, index) => (
                     <div key={index}>
                       <p
@@ -68,8 +71,8 @@ const [page,setpage] = useState(1);
           </div>
           <div>
             <p className="font-DMsans text-secondary_font_color">
-              {`Products from ${page * 9 - 9 + 1} to ${
-                page === Math.floor(AllData.length / 9) + 1 ? AllData.length  : page * 9
+              {`Products from ${page * ShowPageData - ShowPageData + 1} to ${
+                page === Math.floor(AllData.length / ShowPageData) + 1 ? AllData.length  : page * ShowPageData
               } of ${AllData.length}`}
             </p>
           </div>
@@ -77,6 +80,6 @@ const [page,setpage] = useState(1);
       </div>
     </>
   );
-}
+};
 
 export default ShopRightBottom

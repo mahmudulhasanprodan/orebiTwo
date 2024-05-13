@@ -129,7 +129,7 @@ const Menu = () => {
                 {ShowAccount ? <FaAngleUp  /> : <FaAngleDown /> }
               </div>
               {ShowAccount && (
-                <div className="absolute top-44 right-24 z-10">
+                <div className="absolute top-44 right-24  z-10">
                   <Flex
                     className={
                       "flex-col bg-white  justify-center items-center divide-y divide-[#f0f0d48e]"

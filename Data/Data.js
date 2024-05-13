@@ -232,8 +232,8 @@ export const DropdownData = [
 export const DropdownShowData = [
   { id: 1, product: 30 },
   { id: 1, product: 10 },
-  { id: 1, product: 20 },
-  { id: 1, product: 40 },
+  { id: 1, product: 12 },
+  { id: 1, product: 6 },
   { id: 1, product: 25 },
 
 ];
