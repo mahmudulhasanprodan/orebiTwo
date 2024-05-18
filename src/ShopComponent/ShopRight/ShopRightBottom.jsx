@@ -4,8 +4,11 @@ import Button from "../../CommonComponent/Button/Button"
 import axios from 'axios'
 import Flex from '../../CommonComponent/Flex/Flex'
 import {ShopRightContex} from "../ShopRightComponet/ShopRight"
+import { useSelector, useDispatch } from 'react-redux'
+import { setProducts } from '../../Redux/AllSlice/ProductSlice/ProductSlice'
 
 const ShopRightBottom = () => {
+const dispatch = useDispatch();
 const [AllData, setAllData] = useState([]);
 const [page,setpage] = useState(1);
 const ShowPageData = useContext(ShopRightContex);
@@ -15,6 +18,7 @@ const ShowPageData = useContext(ShopRightContex);
       const ProductDataFetcher = async () => {
             const data = await axios.get("https://dummyjson.com/products");
             setAllData(data.data.products);
+            dispatch(setProducts(data.data.products));
       };
       ProductDataFetcher();
     }, []);
