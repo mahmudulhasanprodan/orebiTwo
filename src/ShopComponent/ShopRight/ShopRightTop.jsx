@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { FaBars } from "react-icons/fa";
 import {DropdownData , DropdownShowData} from "../../../Data/Data"
+import { FaBarsProgress } from "react-icons/fa6";
 import Flex from '../../CommonComponent/Flex/Flex';
 
 
@@ -16,8 +17,9 @@ const ShopRightTop = ({ShowPageItem}) => {
   return (
     <>
       <Flex className={"items-center justify-between px-3 pt-2"}>
-        <div className="cursor-pointer">
+        <div className="cursor-pointer flex gap-x-4 items-center">
           <FaBars />
+          <FaBarsProgress />
         </div>
         <div className="flex items-center gap-x-3">
           <Flex className={"items-center"}>

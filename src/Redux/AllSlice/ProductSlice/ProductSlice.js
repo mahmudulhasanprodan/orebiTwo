@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const ApiStatus = {
+    IDLE: "IDLE",
+    LOADING: "LOADING",
+    ERROR: "ERROR",
+}
+
 const initialState = {
   data: [],
-  status: "IDLE",
+  status: ApiStatus.IDLE,
 }
 
 export const ProductSlice = createSlice({
@@ -12,11 +18,30 @@ export const ProductSlice = createSlice({
         setProducts: (state,payload) => {
             state.data = payload;
         },
+        SetStatus: (state, payload) => {
+            state.status = payload;
+        }
     },
 });
 
+//make a thunk function for getting data 
+
+export const FetcherProduct = (apiURL) => {
+  return async function GetProduct(dispatch, getstate) {
+    try {
+        dispatch(SetStatus(ApiStatus.LOADING));
+      const response = await fetch(apiURL);
+      const data = await response.json();
+      dispatch(setProducts(data.products))
+      dispatch(SetStatus(ApiStatus.IDLE));
+    } catch (error) {
+        dispatch(SetStatus(ApiStatus.ERROR));
+      console.log(error);
+    }
+  };
+};
 
 // Action creators are generated for each case reducer function
-export const { setProducts} = ProductSlice.actions
+export const { setProducts, SetStatus} = ProductSlice.actions
 
 export default ProductSlice.reducer
