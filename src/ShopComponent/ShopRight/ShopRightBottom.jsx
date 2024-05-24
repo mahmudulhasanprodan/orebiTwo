@@ -23,13 +23,13 @@ const {data, status} = useSelector((state) => state.products)
 console.log(data, status);
 
 useEffect(() => {
-  if(status.payload === "IDLE" && data.payload.length > 0){
+  if(status.payload === "IDLE"){
     setAllData(data.payload);
   }
 },[status.payload, data.payload]);
 
 
-console.log(AllData);
+
 
 
 
@@ -81,7 +81,7 @@ console.log(AllData);
                   page * ShowPageData
                 ).map((ProductData) => (
                   <div className="py-10 w-[33%]" key={ProductData.id}>
-                    <Link to={`/products-details/ ${ProductData.id}`}>
+                    <Link to={`/products-details/${ProductData.id}`}>
                       <ArrivalCommon
                         Image={ProductData.thumbnail}
                         Colorvarient={ProductData.brand}

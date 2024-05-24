@@ -35,7 +35,7 @@ export const FetcherProduct = (apiURL) => {
       dispatch(setProducts(data.products))
       dispatch(SetStatus(ApiStatus.IDLE));
     } catch (error) {
-        dispatch(SetStatus(ApiStatus.ERROR));
+      dispatch(SetStatus(ApiStatus.ERROR));
       console.log(error);
     }
   };
