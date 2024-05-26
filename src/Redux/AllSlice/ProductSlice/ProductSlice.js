@@ -7,7 +7,7 @@ const ApiStatus = {
 }
 
 const initialState = {
-  data: [],
+  data: {},
   status: ApiStatus.IDLE,
 }
 
@@ -15,24 +15,24 @@ export const ProductSlice = createSlice({
     name: "ProductSlice",
     initialState,
     reducers:{
-        setProducts: (state,payload) => {
+        setProducts: (state, payload) => {
             state.data = payload;
         },
         SetStatus: (state, payload) => {
             state.status = payload;
-        }
+        },
     },
 });
 
 //make a thunk function for getting data 
 
-export const FetcherProduct = (apiURL) => {
+export const FetcherProduct = (apiUrl) => {
   return async function GetProduct(dispatch, getstate) {
     try {
         dispatch(SetStatus(ApiStatus.LOADING));
-      const response = await fetch(apiURL);
+      const response = await fetch(apiUrl);
       const data = await response.json();
-      dispatch(setProducts(data.products))
+      dispatch(setProducts(data))
       dispatch(SetStatus(ApiStatus.IDLE));
     } catch (error) {
       dispatch(SetStatus(ApiStatus.ERROR));
