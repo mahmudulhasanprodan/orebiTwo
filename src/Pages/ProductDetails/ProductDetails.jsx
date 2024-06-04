@@ -5,6 +5,7 @@ import {FetcherProduct} from "../../Redux/AllSlice/ProductSlice/ProductSlice"
 import ProductDetailsTop from '../../ProductDetailsComponent/ProductDetailsTop';
 import Loading from '../../CommonComponent/Loading/Loading';
 import RatingStar from '../../ProductDetailsComponent/RatingStar';
+import ProductInfo from '../../ProductDetailsComponent/ProductInfo';
 
 
 
@@ -30,7 +31,7 @@ useEffect(() => {
 },[status.payload, data.payload])
 
 
-console.log(data.payload.rating);
+console.log(FeatcherData);
  
 
 
@@ -53,13 +54,33 @@ console.log(data.payload.rating);
           </div>
 
           <div>
-            <h2 className="font-DMsans font-bold text-[39px] text-BtnColor">{FeatcherData.title ? FeatcherData.title : "Products"}</h2>
+            <h2 className="font-DMsans text-[39px] font-bold text-BtnColor">
+              {FeatcherData.title ? FeatcherData.title : "Products"}
+            </h2>
           </div>
-          <RatingStar Rating={data.payload.rating}/>
+          <div className="pt-4">
+            <RatingStar rating={data.payload.rating} />
+          </div>
+
+          <div className="flex items-center gap-x-5 pt-5">
+            <span className="font-DMsans text-base text-MenuTextColor line-through">
+              ${FeatcherData.price}
+            </span>
+            <span className="font-DMsans font-bold text-BtnColor">
+              $
+              {Math.round(
+                FeatcherData.price -
+                  (FeatcherData.price * FeatcherData.discountPercentage) / 100,
+              )}
+            </span>
+          </div>
+          <div>
+            <ProductInfo />
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default ProductDetails
+export default ProductDetails ;
