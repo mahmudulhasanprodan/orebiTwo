@@ -75,7 +75,7 @@ console.log(FeatcherData);
             </span>
           </div>
           <div>
-            <ProductInfo />
+            <ProductInfo ProductStock={FeatcherData.stock}/>
           </div>
         </div>
       </div>

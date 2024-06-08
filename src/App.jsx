@@ -3,7 +3,7 @@ import Home from './Pages/Home/Home'
 import RootElement from './CommonComponent/RootElement/RootElement';
 import Shop from './Pages/Shop/Shop';
 import ProductDetails from './Pages/ProductDetails/ProductDetails';
-
+import Registration from './Pages/Registration/Registration';
 
 import {
   createBrowserRouter,
@@ -17,9 +17,13 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootElement />}>
       <Route index element={<Home />}></Route>
       <Route path="/Shop" element={<Shop />}></Route>
-      <Route path="/products-details/:productId" element={<ProductDetails />}></Route>
-    </Route>
-  )
+      <Route
+        path="/products-details/:productId"
+        element={<ProductDetails />}
+      ></Route>
+    <Route path="/registration" element={<Registration />}></Route>,
+    </Route>,
+  ),
 );
 
 const App = () => {

@@ -41,3 +41,15 @@
    }
 
 };
+
+/* @layer components{
+  input,
+  select{
+    --tw-ring-shadow:none !important;
+  }
+  input[type="checkbox"]:checked{
+    background-image: none !important;
+    color: var(--MenuTextColor);
+    border: 3px solid rgb(168, 166, 166);
+  }
+} */
