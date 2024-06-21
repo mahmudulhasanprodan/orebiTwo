@@ -5,8 +5,7 @@ import { FaRegStar } from "react-icons/fa6";
 
 
 const RatingStar = ({rating}) => {
-  console.log(rating);
-
+  
   const StarRating = Array.from({ length: 5 }, (x, index) => {
     let FractionNumber = index + 0.5;
     return (
