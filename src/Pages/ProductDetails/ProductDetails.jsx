@@ -6,7 +6,8 @@ import ProductDetailsTop from '../../ProductDetailsComponent/ProductDetailsTop';
 import Loading from '../../CommonComponent/Loading/Loading';
 import RatingStar from '../../ProductDetailsComponent/RatingStar';
 import ProductInfo from '../../ProductDetailsComponent/ProductInfo';
-
+import { addtoCart } from '../../Redux/AllSlice/CartSlice/CartSlice';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -14,9 +15,12 @@ const ProductDetails = () => {
 
 const dispatch = useDispatch();
 const [FeatcherData,setFeatcherData] = useState({});
+const {productId} =useParams();
+
+
 
 useEffect(() => {
-  dispatch(FetcherProduct("https://dummyjson.com/products/1"));
+  dispatch(FetcherProduct(`https://dummyjson.com/products/${productId}`));
 },[]);
 
  const {data,status} = useSelector((state) => state.products);
@@ -34,10 +38,9 @@ useEffect(() => {
 // HandlecarItem function start here 
 
 const HandlecarItem = () =>{
-  alert("hello")
+  dispatch(addtoCart(FeatcherData));
 };
  
-
 
 
   return (
@@ -70,13 +73,13 @@ const HandlecarItem = () =>{
             <span className="font-DMsans text-base text-MenuTextColor line-through">
               ${FeatcherData.price}
             </span>
-            <span className="font-DMsans font-bold text-BtnColor">
+            <p className="font-DMsans font-bold text-BtnColor">
               $
               {Math.round(
                 FeatcherData.price -
                   (FeatcherData.price * FeatcherData.discountPercentage) / 100,
               )}
-            </span>
+            </p>
           </div>
           <div>
             <ProductInfo ProductStock={FeatcherData.stock} oncart={HandlecarItem}/>
