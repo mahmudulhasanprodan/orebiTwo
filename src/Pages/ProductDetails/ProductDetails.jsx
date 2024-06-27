@@ -31,7 +31,11 @@ useEffect(() => {
 },[status.payload, data.payload])
 
 
-console.log(FeatcherData);
+// HandlecarItem function start here 
+
+const HandlecarItem = () =>{
+  alert("hello")
+};
  
 
 
@@ -75,7 +79,7 @@ console.log(FeatcherData);
             </span>
           </div>
           <div>
-            <ProductInfo ProductStock={FeatcherData.stock}/>
+            <ProductInfo ProductStock={FeatcherData.stock} oncart={HandlecarItem}/>
           </div>
         </div>
       </div>

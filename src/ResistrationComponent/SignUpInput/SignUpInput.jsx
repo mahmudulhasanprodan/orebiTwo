@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SignUpInput = ({className, inputType, labelInput, PlaceholderName, InputId,oninpuChange}) => {
+const SignUpInput = ({className, inputType, labelInput, PlaceholderName, InputId,oninpuChange, valuefrom}) => {
   return (
     <>
       <div className="flex basis-2/5 flex-col gap-y-4">
@@ -17,6 +17,7 @@ const SignUpInput = ({className, inputType, labelInput, PlaceholderName, InputId
           name={InputId}
           placeholder={PlaceholderName}
           onChange={oninpuChange}
+          value={valuefrom}
         />
       </div>
     </>

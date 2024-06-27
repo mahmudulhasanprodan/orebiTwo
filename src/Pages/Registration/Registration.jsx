@@ -3,11 +3,16 @@ import ResistrationTop from '../../ResistrationComponent/ResistrationTop/Resistr
 import SignUpInput from '../../ResistrationComponent/SignUpInput/SignUpInput';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { toast, Bounce } from 'react-toastify';
+import {db} from "../../../Firebase/FirebaseConfig"
+import { collection, addDoc } from "firebase/firestore"; 
+
 
 const Registration = () => {
   const auth = getAuth();
 
-  const[showinput,setshowinput ] = useState({
+  const [loading,setloading] = useState(false);
+
+  const [showinput, setshowinput] = useState({
     FirstName: "",
     LastName: "",
     Emailaddress: "",
@@ -23,10 +28,9 @@ const Registration = () => {
     agreement: false,
     subscribe1: false,
     subscribe2: false,
-  })
+  });
 
-  
-  const[showinputerror,setshowinputerror ] = useState({
+  const [showinputerror, setshowinputerror] = useState({
     FirstNameError: "",
     EmailaddressError: "",
     TelephoneError: "",
@@ -37,196 +41,253 @@ const Registration = () => {
     RepeatPasswordError: "",
     agreementError: false,
     passwordnotmatch: "",
-  })
+  });
 
-
-  // handleInput function start here 
+  // handleInput function start here
   const handleInput = (e) => {
-    if(e.target.checked){
+    if (e.target.checked) {
       setshowinput({
         ...showinput,
         [e.target.id]: true,
       });
-    }else{
+    } else {
       setshowinput({
         ...showinput,
         [e.target.id]: e.target.value,
       });
-    }  
-    };
- 
-
-  // HandlesighUp function start here 
-  const HandlesighUp = () => {
-      const {
-        FirstName,
-        Emailaddress,
-        Telephone,
-        Address1,
-        City,
-        PostCode,
-        Password,
-        RepeatPassword,
-        agreement,
-       } =showinput;
-       const {
-         FirstNameError,
-         EmailaddressError,
-         TelephoneError,
-         Address1Error,
-         CityError,
-         PostCodeError,
-         PasswordError,
-         RepeatPasswordError,
-         agreementError,
-         passwordnotmatch,
-       } = showinputerror;
-      if (!FirstName) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "First Name Missing",
-        });
-      } else if (!Emailaddress) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "Email address Missing",
-        });
-      } else if (!Telephone) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "Telephone number Missing",
-        });
-      } else if (!Address1) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "address1 Missing",
-        });
-      } else if (!City) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "",
-          CityError: "City is Missing",
-        });
-      } else if (!PostCode) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "",
-          CityError: "",
-          PostCodeError: "post is missig",
-        });
-      } else if (!Password) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "",
-          CityError: "",
-          PostCodeError: "",
-          PasswordError: "password is Missing",
-        });
-      } else if (!RepeatPassword) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "",
-          CityError: "",
-          PostCodeError: "",
-          PasswordError: "",
-          RepeatPasswordError: "Repeat password is Missing",
-        });
-      } else if (Password !== RepeatPassword) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "",
-          CityError: "",
-          PostCodeError: "",
-          PasswordError: "",
-          RepeatPasswordError: "",
-          passwordnotmatch: "Password Not Match",
-        });
-      } else if (agreement === false) {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "",
-          CityError: "",
-          PostCodeError: "",
-          PasswordError: "",
-          RepeatPasswordError: "",
-          passwordnotmatch: "",
-          agreementError: "agreement is Missing",
-        });
-      } else {
-        setshowinputerror({
-          ...showinputerror,
-          FirstNameError: "",
-          EmailaddressError: "",
-          TelephoneError: "",
-          Address1Error: "",
-          CityError: "",
-          PostCodeError: "",
-          PasswordError: "",
-          RepeatPasswordError: "",
-          passwordnotmatch: "",
-          agreementError: "",
-        });
-        createUserWithEmailAndPassword(
-          auth,
-          showinput.Emailaddress,
-          showinput.Password,
-        ).then((userInfo) => {
-          toast('🦄Resistration Done!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-            }).catch((err) => {
-              toast.error(`${err.Code}`, {
-                position: "top-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-                });
-            })
-        });
-      }
+    }
   };
+
+  // HandlesighUp function start here
+  const HandlesighUp = () => {
+    const {
+      FirstName,
+      Emailaddress,
+      Telephone,
+      Address1,
+      City,
+      PostCode,
+      Password,
+      RepeatPassword,
+      agreement,
+    } = showinput;
+    if (!FirstName) {
+      setshowinputerror({
+        ...showinputerror,
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        FirstNameError: "First Name Missing",
+      });
+    } else if (!Emailaddress) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        EmailaddressError: "Email address Missing",
+      });
+    } else if (!Telephone) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        TelephoneError: "Telephone number Missing",
+      });
+    } else if (!Address1) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        Address1Error: "address1 Missing",
+      });
+    } else if (!City) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        CityError: "City is Missing",
+      });
+    } else if (!PostCode) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        PostCodeError: "post is missig",
+      });
+    } else if (!Password) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        PasswordError: "password is Missing",
+      });
+    } else if (!RepeatPassword) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+        RepeatPasswordError: "Repeat password is Missing",
+      });
+    } else if (Password !== RepeatPassword) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "Password Not Match",
+      });
+    } else if (!agreement) {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "agreement is Missing",
+      });
+    } else {
+      setshowinputerror({
+        ...showinputerror,
+        FirstNameError: "",
+        EmailaddressError: "",
+        TelephoneError: "",
+        Address1Error: "",
+        CityError: "",
+        PostCodeError: "",
+        PasswordError: "",
+        RepeatPasswordError: "",
+        passwordnotmatch: "",
+        agreementError: "",
+      });
+  
+      setloading(true);
+
+      //Create new user with firebase
+      createUserWithEmailAndPassword(auth, showinput.Emailaddress, showinput.Password).then((uservalue) => {
+        toast.success(`${showinput.FirstName} Resistration Done`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          });
+      }).then(() =>{
+        addDoc(collection(db, "users"), showinput).then((useCredential) =>{
+          console.log(useCredential);
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+      .catch((error) => {
+        toast.error('🦄 Wow so easy!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          });
+      }).finally(() => {
+        setloading(false);
+        setshowinput({
+          FirstName: "",
+          LastName: "",
+          Emailaddress: "",
+          Telephone: "",
+          Address1: "",
+          Address2: "",
+          City: "",
+          PostCode: "",
+          Division: "",
+          District: "",
+          Password: "",
+          RepeatPassword: "",
+          agreement: false,
+          subscribe1: false,
+          subscribe2: false,
+        });
+      })
+
+    };
+  }
 
 
   return (
     <>
       <div className="container">
-        <ResistrationTop />
+        <div><ResistrationTop /></div>
         {/* Personal details here */}
         <div>
           <form action="#" onSubmit={(e) => e.preventDefault()}>
@@ -244,7 +305,7 @@ const Registration = () => {
                   PlaceholderName={"First Name"}
                   InputId={"FirstName"}
                   oninpuChange={handleInput}
-                  
+                  valuefrom={showinput.FirstName}
                 />
                 {showinputerror.FirstNameError && (
                   <p className="text-red-500">
@@ -260,6 +321,7 @@ const Registration = () => {
                   PlaceholderName={"Last Name"}
                   InputId={"LastName"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.LastName}
                 />
               </div>
               <div className="basis-2/5">
@@ -270,6 +332,7 @@ const Registration = () => {
                   PlaceholderName={"company@domain.com"}
                   InputId={"Emailaddress"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.Emailaddress}
                 />
                 {showinputerror.EmailaddressError && (
                   <p className="text-red-500">
@@ -285,6 +348,7 @@ const Registration = () => {
                   PlaceholderName={"Your phone number"}
                   InputId={"Telephone"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.Telephone}
                 />
                 {showinputerror.TelephoneError && (
                   <p className="text-red-500">
@@ -314,6 +378,7 @@ const Registration = () => {
                   PlaceholderName={"4279 Zboncak Port Suite 6212"}
                   InputId={"Address1"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.Address1}
                 />
                 {showinputerror.Address1Error && (
                   <p className="text-red-500">{showinputerror.Address1Error}</p>
@@ -329,6 +394,7 @@ const Registration = () => {
                   PlaceholderName={"----"}
                   InputId={"Address2"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.Address2}
                 />
               </div>
               <div className="basis-2/5">
@@ -339,6 +405,7 @@ const Registration = () => {
                   PlaceholderName={"Your city"}
                   InputId={"City"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.City}
                 />
                 {showinputerror.CityError && (
                   <p className="text-red-500">{showinputerror.CityError}</p>
@@ -352,6 +419,7 @@ const Registration = () => {
                   PlaceholderName={"05228"}
                   InputId={"PostCode"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.PostCode}
                 />
                 {showinputerror.PostCodeError && (
                   <p className="text-red-500">{showinputerror.PostCodeError}</p>
@@ -368,6 +436,7 @@ const Registration = () => {
                   id="Division"
                   className="w-full cursor-pointer border-[1px] border-gray-200 py-2"
                   onChange={handleInput}
+                  value={showinput.Division}
                 >
                   <option value="">Please select</option>
                   <option value="Chittagonj">Chittagonj</option>
@@ -389,6 +458,7 @@ const Registration = () => {
                   id="District"
                   className="w-full cursor-pointer border-[1px] border-gray-200 py-2"
                   onChange={handleInput}
+                  value={showinput.District}
                 >
                   <option value="">Please select</option>
                   <option value="kishoregonj">kishoregonj</option>
@@ -423,9 +493,13 @@ const Registration = () => {
                   PlaceholderName={"Password"}
                   InputId={"Password"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.Password}
                 />
                 {showinputerror.PasswordError && (
                   <p className="text-red-500">{showinputerror.PasswordError}</p>
+                )}
+                 {showinputerror.passwordnotmatch && (
+                  <p className="text-red-500">{showinputerror.passwordnotmatch}</p>
                 )}
               </div>
               <div className="basis-2/5">
@@ -436,16 +510,19 @@ const Registration = () => {
                   PlaceholderName={"Repeat Password"}
                   InputId={"RepeatPassword"}
                   oninpuChange={handleInput}
+                  valuefrom={showinput.RepeatPassword}
                 />
                 {showinputerror.RepeatPasswordError && (
                   <p className="text-red-500">
                     {showinputerror.RepeatPasswordError}
                   </p>
                 )}
-              </div>
-              {showinputerror.passwordnotmatch && (
-                  <p className="text-red-500">{showinputerror.passwordnotmatch}</p>
+                {showinputerror.passwordnotmatch && (
+                  <p className="text-red-500">
+                    {showinputerror.passwordnotmatch}
+                  </p>
                 )}
+              </div>
             </div>
           </form>
         </div>
@@ -459,6 +536,7 @@ const Registration = () => {
             name="agreement"
             id="agreement"
             onChange={handleInput}
+            value={showinput.agreement}
           />
           <p
             className={`${showinputerror.agreementError ? "font-DMsans text-base text-red-300" : "font-DMsans text-base text-MenuTextColor"}`}
@@ -482,6 +560,7 @@ const Registration = () => {
               name="subscribe 1"
               id="subscribe1"
               onChange={handleInput}
+              value={showinput.subscribe1}
             />
             <p className="font-DMsans text-base text-MenuTextColor">Yes</p>
           </div>
@@ -492,6 +571,7 @@ const Registration = () => {
               name="subscribe 2"
               id="subscribe2"
               onChange={handleInput}
+              value={showinput.subscribe2}
             />
             <p className="font-DMsans text-base text-MenuTextColor">No</p>
           </div>
@@ -500,12 +580,25 @@ const Registration = () => {
 
         {/* button here */}
         <div className="py-14">
-          <button
-            className="text-md rounded-sm bg-black px-20 py-2 font-DMsans font-bold text-white"
-            onClick={HandlesighUp}
-          >
-            Sign Up
-          </button>
+          {loading ? (
+            <button
+              type="button"
+              class="font-Roboto mt-4 flex w-[250px] items-center justify-center rounded bg-indigo-500 py-4 text-xl font-bold text-white"
+            >
+              <svg
+                class="mr-3 h-5 w-5 animate-spin rounded-full border-4 border-t-4 border-gray-300 border-b-white"
+                viewBox="0 0 24 24"
+              ></svg>
+              Processing...
+            </button>
+          ) : (
+            <button
+              className="font-Roboto mt-4 w-[250px] rounded-sm bg-orange-600 py-4 text-xl font-normal text-white"
+              onClick={HandlesighUp}
+            >
+              SIGN UP
+            </button>
+          )}
         </div>
         {/* button here */}
       </div>
