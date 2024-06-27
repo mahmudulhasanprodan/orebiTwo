@@ -5,7 +5,7 @@ import Productdetails from '../CommonComponent/Productdetails/Productdetails'
 import Review from "../CommonComponent/Productdetails/Review"
 
 
-const ProductInfo = ({ProductStock,oncart}) => {
+const ProductInfo = ({ProductStock, oncart}) => {
 
 
 const colorItem = [
@@ -82,12 +82,10 @@ const colorItem = [
           {/* {Status part item}  */}
           {/* {Wishlist and add to cart part }  */}
           <div className="flex items-center gap-x-6 pt-4">
-            <Button
-              title={"Add to Wish List"}
-              className={
-                "rounded border-2 border-BtnColor px-12 py-2 font-DMsans text-sm font-bold"
-              }
-            />
+            <button className="rounded border-2 border-BtnColor px-12 py-2 font-DMsans text-sm font-bold">
+              Add to Wish List
+            </button>
+            <button />
             <button
               className="rounded bg-BtnColor px-10 py-2 font-DMsans text-base font-bold text-white"
               onClick={oncart}
@@ -95,8 +93,8 @@ const colorItem = [
               Add to Cart
             </button>
           </div>
-          {/* {Wishlist and add to cart par}  */} 
-            {/* dr opdown list */}
+          {/* {Wishlist and add to cart par}  */}
+          {/* dr opdown list */}
 
           <Productdetails title={"FEATURES & DETAILS"} />
           <hr />

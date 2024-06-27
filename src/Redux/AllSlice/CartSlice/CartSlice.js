@@ -15,25 +15,36 @@ const initialState = {
     initialState,
     reducers:{
        addtoCart: (state,action) =>{
-         const findIndex = state.carItem.findIndex((item) => {
-           
+         const findIndex = state.carItem.findIndex((item) => {          
             return item.id === action.payload.id;
          });
          if(findIndex >= 0){
             state.carItem[findIndex].cartQuantity += 1;
+            // toast.info(`${action.payload.title} Again Added`, {
+            //   position: "top-left",
+            //   autoClose: 5000,
+            //   hideProgressBar: false,
+            //   closeOnClick: true,
+            //   pauseOnHover: true,
+            //   draggable: true,
+            //   progress: undefined,
+            //   theme: "light",
+            //   transition: Bounce,
+            //   });
          }else{
-          state.carItem.push({...action.payload, cartQuantity: 1});
-          toast.success(`${action.payload.title} Added to Cart`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-            });
+          const temporary = {...action.payload, cartQuantity: 1}
+          state.carItem.push(temporary);
+          // toast.success(`${action.payload.title} Added to Cart`, {
+          //   position: "top-right",
+          //   autoClose: 5000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "light",
+          //   transition: Bounce,
+          //   });
          };
        },
     },
