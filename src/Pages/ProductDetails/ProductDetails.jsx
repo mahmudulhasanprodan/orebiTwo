@@ -68,7 +68,7 @@ const HandlecarItem = () =>{
             </h2>
           </div>
           <div className="pt-4">
-            <RatingStar rating={data.payload.rating} />
+            <RatingStar  rating={data.payload && (data.payload.rating)}/>
           </div>
 
           <div className="flex items-center gap-x-5 pt-5">

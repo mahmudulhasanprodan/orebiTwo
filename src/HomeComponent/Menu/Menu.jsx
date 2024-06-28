@@ -17,7 +17,7 @@ const Menu = () => {
  const[ShowAccount, setShowAccount] = useState(false);
  const[ShowCart, setShowCart] = useState(false);
  const MenuRef = useRef();
- console.log(MenuRef);
+ 
 
 // HandleCategories function start here 
  const HandleCategories = () => {

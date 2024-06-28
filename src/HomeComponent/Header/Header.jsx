@@ -40,7 +40,7 @@ const Header = () => {
                   About
                 </NavLink>
                 <NavLink
-                  to={"/Contacts"}
+                  to={"/contact"}
                   className={"active:text-black active:font-bold"}
                 >
                   Contacts
