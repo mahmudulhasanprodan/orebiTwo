@@ -87,7 +87,7 @@ const colorItem = [
             </button>
             <button />
             <button
-              className="rounded bg-BtnColor px-10 py-2 font-DMsans text-base font-bold text-white"
+              className="rounded bg-BtnColor px-10 py-2 font-DMsans text-base font-bold text-white active:bg-green-400"
               onClick={oncart}
             >
               Add to Cart

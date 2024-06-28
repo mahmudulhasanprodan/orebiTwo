@@ -7,13 +7,14 @@ import Loading from '../../CommonComponent/Loading/Loading';
 import RatingStar from '../../ProductDetailsComponent/RatingStar';
 import ProductInfo from '../../ProductDetailsComponent/ProductInfo';
 import { addtoCart } from '../../Redux/AllSlice/CartSlice/CartSlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
 const ProductDetails = () => {
 
 const dispatch = useDispatch();
+const navigate= useNavigate();
 const [FeatcherData,setFeatcherData] = useState({});
 const {productId} =useParams();
 
@@ -39,6 +40,7 @@ useEffect(() => {
 
 const HandlecarItem = () =>{
   dispatch(addtoCart(FeatcherData));
+  navigate("/cart");
 };
  
 

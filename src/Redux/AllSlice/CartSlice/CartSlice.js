@@ -1,13 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { stringify } from 'postcss';
 import {toast, Bounce } from 'react-toastify';
 
 
 
 const initialState = {
-    carItem: [],
-    totalcartItem: 1,
-    totalAmoun: 1,
-  };
+  carItem: localStorage.getItem("carItem")
+    ? JSON.parse(localStorage.getItem("carItem"))
+    : [],
+  totalcartItem: 1,
+  totalAmoun: 1,
+};
   
 
   export const cartSlice = createSlice({
@@ -20,33 +23,51 @@ const initialState = {
          });
          if(findIndex >= 0){
             state.carItem[findIndex].cartQuantity += 1;
-            // toast.info(`${action.payload.title} Again Added`, {
-            //   position: "top-left",
-            //   autoClose: 5000,
-            //   hideProgressBar: false,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            //   theme: "light",
-            //   transition: Bounce,
-            //   });
+            localStorage.setItem("carItem",JSON.stringify(state.carItem));
+            toast.info(`${action.payload.title} Again Added`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+              });
          }else{
           const temporary = {...action.payload, cartQuantity: 1}
           state.carItem.push(temporary);
-          // toast.success(`${action.payload.title} Added to Cart`, {
-          //   position: "top-right",
-          //   autoClose: 5000,
-          //   hideProgressBar: false,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "light",
-          //   transition: Bounce,
-          //   });
+          localStorage.setItem("carItem",JSON.stringify(state.carItem));
+          toast.success(`${action.payload.title} Added to Cart`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
          };
        },
+       removeCaritem: (state, action) => {
+          const removeItem = state.carItem.filter((item) => item.id !== action.payload.id);       
+          state.carItem = removeItem;
+          localStorage.setItem("carItem",JSON.stringify(state.carItem));
+          toast.error(`${action.payload.title} Removed to Cart`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
+       }
     },
 });
 
@@ -54,6 +75,6 @@ const initialState = {
 
 
 // Action creators are generated for each case reducer function
-export const { addtoCart} = cartSlice.actions
+export const { addtoCart,removeCaritem} = cartSlice.actions
 
 export default cartSlice.reducer
