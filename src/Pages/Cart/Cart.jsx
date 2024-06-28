@@ -94,7 +94,7 @@ const HandleremoveItem = (item) => {
                 </p>
               </div>
             </div>
-          ))) : "kiso nai"}
+          ))) : ""}
          
          </div>
         </div>

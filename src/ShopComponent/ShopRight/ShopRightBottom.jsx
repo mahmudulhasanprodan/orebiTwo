@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FetcherProduct, setProducts } from '../../Redux/AllSlice/ProductSlice/ProductSlice'
 import { Link } from 'react-router-dom'
 import Loading from '../../CommonComponent/Loading/Loading'
+import { MdOutlineKeyboardDoubleArrowRight,MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const ShopRightBottom = () => {
 const dispatch = useDispatch();
@@ -33,24 +34,10 @@ useEffect(() => {
 },[status.payload, data.payload]);
 
 
-
-
-
-
-
-
-
-    // useEffect(() => {
-    //   const ProductDataFetcher = async () => {
-    //         const data = await axios.get("https://dummyjson.com/products");
-    //         setAllData(data.data.products);
-    //         dispatch(setProducts(data.data.products));
-    //   };
-    //   ProductDataFetcher();
-    // }, []);
-    // HandlePagination function start here 
     const HandlePagination = (pageNumber) =>{
+      if (pageNumber > 0 && pageNumber <= Math.floor(AllData.length / ShowPageData) + 1) {
         setpage(pageNumber);
+      }
     };
 
  
@@ -68,9 +55,9 @@ useEffect(() => {
               <div className="flex flex-wrap">
                 {AllData?.slice(
                   page * ShowPageData - ShowPageData,
-                  page * ShowPageData
+                  page * ShowPageData,
                 ).map((ProductData) => (
-                  <div className="py-10 w-[33%]" key={ProductData.id}>
+                  <div className="w-[33%] py-10" key={ProductData.id}>
                     <Link to={`/products-details/${ProductData.id}`}>
                       <ArrivalCommon
                         Image={ProductData.thumbnail}
@@ -79,11 +66,11 @@ useEffect(() => {
                         Price={ProductData.price}
                         baze={
                           <Button
-                            className={"py-1 px-6 bg-black text-white"}
+                            className={"bg-black px-6 py-1 text-white"}
                             title={
                               ProductData.rating > 4.5
                                 ? `-$${Math.floor(
-                                    ProductData.discountPercentage
+                                    ProductData.discountPercentage,
                                   )}`
                                 : "New"
                             }
@@ -94,20 +81,27 @@ useEffect(() => {
                   </div>
                 ))}
               </div>
-              <Flex className={"items-center justify-between py-6 px-3"}>
-                <div>
+              <Flex className={"items-center justify-between px-3 py-6"}>
+                <div className="flex gap-x-3">
+                  <p
+                    className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center bg-green-200 text-black"
+                    onClick={() => HandlePagination(page - 1)}
+                  >
+                    <MdOutlineKeyboardDoubleArrowLeft />
+                  </p>
                   <ul>
-                    <li className="flex items-center gap-x-2 cursor-pointer">
+                    <li className="flex cursor-pointer items-center gap-x-2">
                       {[
                         ...new Array(
-                          Math.floor(AllData.length / ShowPageData) + 1
+                          Math.floor(AllData.length / ShowPageData) <=
+                          AllData.length / ShowPageData
+                            ? Math.floor(AllData.length / ShowPageData) + 1
+                            : AllData.length / ShowPageData,
                         ),
-                      ].map((item, index) => (
+                      ].map((pageNumber, index) => (
                         <div key={index}>
                           <p
-                            className={`py-2 bg-black px-4 gap-x-2 text-white font-bold ${
-                              index + 1 === page && "bg-green-500"
-                            }`}
+                            className={`flex h-[36px] w-[36px] cursor-pointer items-center justify-center bg-black text-white ${index + 1 === page && "bg-blue-400"}`}
                             onClick={() => HandlePagination(index + 1)}
                           >
                             {index + 1}
@@ -116,16 +110,21 @@ useEffect(() => {
                       ))}
                     </li>
                   </ul>
+                  <p
+                    className="flex h-[36px] w-[36px] cursor-pointer items-center justify-center bg-green-200 text-black"
+                    onClick={() => HandlePagination(page + 1)}
+                  >
+                    <MdOutlineKeyboardDoubleArrowRight />
+                  </p>
                 </div>
                 <div>
-                  <p className="font-DMsans text-secondary_font_color">
-                    {`Products from ${
-                      page * ShowPageData - ShowPageData + 1
-                    } to ${
-                      page === Math.floor(AllData.length / ShowPageData) + 1
-                        ? AllData.length
-                        : page * ShowPageData
-                    } of ${AllData.length}`}
+                  <p className="text-secondary_font_color font-DMsans">
+                    Products from {page * ShowPageData - ShowPageData + 1} to
+                    {page === Math.floor(AllData.length / ShowPageData) + 1
+                      ? AllData.length
+                      : page * ShowPageData}{" "}
+                    of
+                    {AllData.length}
                   </p>
                 </div>
               </Flex>
