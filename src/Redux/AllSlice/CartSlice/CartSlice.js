@@ -67,7 +67,45 @@ const initialState = {
             theme: "light",
             transition: Bounce,
             });
+       },
+       IncrementQuantity: (state, action) => {
+       const findIndex = state.carItem.findIndex((item) => item.id === action.payload.id)
+        if(findIndex >= 0){
+          state.carItem[findIndex].cartQuantity += 1;
+          localStorage.setItem("carItem",JSON.stringify(state.carItem));
+          toast.success(`${action.payload.title} Increment`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
+        };
+       },
+
+       DecrementQuantity: (state,action) => {
+        const findIndex = state.carItem.findIndex((item) => item.id === action.payload.id)
+        if(state.carItem[findIndex].cartQuantity > 1){
+          state.carItem[findIndex].cartQuantity -= 1;
+          localStorage.setItem("carItem",JSON.stringify(state.carItem));
+          toast.error(`${action.payload.title} Decrement`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
+        };
        }
+
     },
 });
 
@@ -75,6 +113,6 @@ const initialState = {
 
 
 // Action creators are generated for each case reducer function
-export const { addtoCart,removeCaritem} = cartSlice.actions
+export const { addtoCart,removeCaritem,IncrementQuantity,DecrementQuantity} = cartSlice.actions
 
 export default cartSlice.reducer
