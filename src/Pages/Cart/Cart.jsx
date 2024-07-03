@@ -5,7 +5,7 @@ import { FaPlus,  FaMinus } from "react-icons/fa6";
 import { useSelector,useDispatch } from 'react-redux';
 import { MdCancel } from "react-icons/md";
 import { removeCaritem,IncrementQuantity,DecrementQuantity,GetTotal} from '../../Redux/AllSlice/CartSlice/CartSlice';
-import axios from 'axios';
+
 
 
 const Cart = () => {
@@ -95,7 +95,7 @@ const HandleDecrement = (item) => {
                     </div>
                     <div className="flex shrink grow basis-60 justify-center pl-6">
                       <div className="flex items-center">
-                        <div className="flex cursor-pointer items-center justify-around gap-x-3  border-2 border-gray-300 py-1">
+                        <div className="flex cursor-pointer items-center justify-around gap-x-3  border-2 border-gray-300 py-1" key={item.id}>
                           <span
                             className="px-1"
                             onClick={() => HandleDecrement(item)}
