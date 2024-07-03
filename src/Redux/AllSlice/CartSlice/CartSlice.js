@@ -8,8 +8,8 @@ const initialState = {
   carItem: localStorage.getItem("carItem")
     ? JSON.parse(localStorage.getItem("carItem"))
     : [],
-  totalcartItem: 1,
-  totalAmoun: 1,
+  totalcartItem: 0,
+  totalAmount: 0,
 };
   
 
@@ -104,7 +104,22 @@ const initialState = {
             transition: Bounce,
             });
         };
-       }
+       },
+       GetTotal: (state,action) => {
+       const Totalcart = state.carItem.reduce((TotalCart, cartItem) => {
+          const {cartQuantity,price} = cartItem;
+          const TotalItemQuantity = cartQuantity*price;
+          TotalCart.totalAmount += Math.round(TotalItemQuantity);
+          TotalCart.totalcart += cartQuantity;
+          return TotalCart;
+        },{
+            totalAmount: 0,
+            totalcart: 0
+        })
+          state.totalcartItem = Totalcart.totalcart
+          state.totalAmount = Totalcart.totalAmount
+        console.log(Totalcart);
+       },
 
     },
 });
@@ -113,6 +128,6 @@ const initialState = {
 
 
 // Action creators are generated for each case reducer function
-export const { addtoCart,removeCaritem,IncrementQuantity,DecrementQuantity} = cartSlice.actions
+export const { addtoCart,removeCaritem,IncrementQuantity,DecrementQuantity,GetTotal} = cartSlice.actions
 
 export default cartSlice.reducer
