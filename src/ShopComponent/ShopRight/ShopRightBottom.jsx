@@ -9,7 +9,7 @@ import { FetcherProduct, setProducts } from '../../Redux/AllSlice/ProductSlice/P
 import { Link } from 'react-router-dom'
 import Loading from '../../CommonComponent/Loading/Loading'
 import { MdOutlineKeyboardDoubleArrowRight,MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
-
+import { addtoCart } from '../../Redux/AllSlice/CartSlice/CartSlice'
 const ShopRightBottom = () => {
 const dispatch = useDispatch();
 const [AllData, setAllData] = useState([]);
@@ -40,7 +40,10 @@ useEffect(() => {
       }
     };
 
- 
+ // HandleCart Function start here 
+ const HandleCart = (item) => {
+  dispatch(addtoCart(item));
+ };
 
   return (
     <>
@@ -58,26 +61,26 @@ useEffect(() => {
                   page * ShowPageData,
                 ).map((ProductData) => (
                   <div className="w-[33%] py-10" key={ProductData.id}>
-                    <Link to={`/products-details/${ProductData.id}`}>
-                      <ArrivalCommon
-                        Image={ProductData.thumbnail}
-                        Colorvarient={ProductData.brand}
-                        ProductName={ProductData.title}
-                        Price={ProductData.price}
-                        baze={
-                          <Button
-                            className={"bg-black px-6 py-1 text-white"}
-                            title={
-                              ProductData.rating > 4.5
-                                ? `-$${Math.floor(
-                                    ProductData.discountPercentage,
-                                  )}`
-                                : "New"
-                            }
-                          />
-                        }
-                      />
-                    </Link>
+                    <ArrivalCommon
+                      AddTocart={()=> HandleCart(ProductData)}
+                      ProductId={ProductData.id}
+                      Image={ProductData.thumbnail}
+                      Colorvarient={ProductData.brand}
+                      ProductName={ProductData.title}
+                      Price={ProductData.price}
+                      baze={
+                        <Button
+                          className={"bg-black px-6 py-1 text-white"}
+                          title={
+                            ProductData.rating > 4.5
+                              ? `-$${Math.floor(
+                                  ProductData.discountPercentage,
+                                )}`
+                              : "New"
+                          }
+                        />
+                      }
+                    />
                   </div>
                 ))}
               </div>

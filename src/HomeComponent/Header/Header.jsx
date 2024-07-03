@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from "../../assets/HomeComponentPic/Mainlogo.png"
-import { NavLink  } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Flex from '../../CommonComponent/Flex/Flex';
 
 
@@ -53,7 +53,9 @@ const Header = () => {
                 </NavLink>
               </Flex>
             </div>
-            <div></div>
+            <div>
+              <h2 className="font-DMsans text-sm">Already member? <Link to={"/login"} className="text-blue-400 font-bold underline">Login</Link> here.</h2>
+            </div>
           </Flex>
         </div>
       </div>

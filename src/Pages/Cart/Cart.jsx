@@ -5,7 +5,7 @@ import { FaPlus,  FaMinus } from "react-icons/fa6";
 import { useSelector,useDispatch } from 'react-redux';
 import { MdCancel } from "react-icons/md";
 import { removeCaritem,IncrementQuantity,DecrementQuantity,GetTotal} from '../../Redux/AllSlice/CartSlice/CartSlice';
-
+import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
@@ -95,7 +95,10 @@ const HandleDecrement = (item) => {
                     </div>
                     <div className="flex shrink grow basis-60 justify-center pl-6">
                       <div className="flex items-center">
-                        <div className="flex cursor-pointer items-center justify-around gap-x-3  border-2 border-gray-300 py-1" key={item.id}>
+                        <div
+                          className="flex cursor-pointer items-center justify-around gap-x-3  border-2 border-gray-300 py-1"
+                          key={item.id}
+                        >
                           <span
                             className="px-1"
                             onClick={() => HandleDecrement(item)}
@@ -125,24 +128,30 @@ const HandleDecrement = (item) => {
           </div>
           <div className="py-10">
             <div className="py-5 text-end">
-              <h2 className="font-DMsans text-xl font-bold">Cart totals: {totalcartItem}</h2>
+              <h2 className="font-DMsans text-xl font-bold">
+                Cart totals: {totalcartItem}
+              </h2>
             </div>
             <div>
               <div className="flex items-center justify-end">
-                <div className="basis-1/4 border-[1px] border-gray-400 py-2 rounded-sm">
-                  <h2 className="font-DMsans text-base font-bold pl-3">Subtotal:</h2>
+                <div className="basis-1/4 rounded-sm border-[1px] border-gray-400 py-2">
+                  <h2 className="pl-3 font-DMsans text-base font-bold">
+                    Subtotal:
+                  </h2>
                 </div>
-                <div className="basis-1/4  border-[1px] border-gray-400 py-2 rounded-sm">
+                <div className="basis-1/4  rounded-sm border-[1px] border-gray-400 py-2">
                   <h2 className="pl-5 font-DMsans text-base font-normal">
                     {totalAmount} $
                   </h2>
                 </div>
               </div>
               <div className="flex items-center justify-end rounded-sm">
-                <div className="basis-1/4  border-[1px] border-gray-400 py-2 rounded-sm">
-                  <h2 className="font-DMsans text-base font-bold pl-3">Total:</h2>
+                <div className="basis-1/4  rounded-sm border-[1px] border-gray-400 py-2">
+                  <h2 className="pl-3 font-DMsans text-base font-bold">
+                    Total:
+                  </h2>
                 </div>
-                <div className="basis-1/4  border-[1px] border-gray-400 py-2 rounded-sm">
+                <div className="basis-1/4  rounded-sm border-[1px] border-gray-400 py-2">
                   <h2 className="pl-5 font-DMsans text-base font-normal">
                     {totalAmount} $
                   </h2>
@@ -150,9 +159,11 @@ const HandleDecrement = (item) => {
               </div>
             </div>
             <div className="flex justify-end pt-6">
-              <button className="bg-BtnColor px-14 py-2 font-DMsans text-base font-bold text-white rounded-sm">
-                Proceed to Checkout
-              </button>
+              <Link to={"/registration"}>
+                <button className="rounded-sm bg-BtnColor px-14 py-4 font-DMsans text-base font-bold text-white active:bg-blue-400">
+                  Proceed to Checkout
+                </button>
+              </Link>
             </div>
           </div>
         </div>

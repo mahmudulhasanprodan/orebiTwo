@@ -17,6 +17,7 @@ const Menu = () => {
  const[ShowAccount, setShowAccount] = useState(false);
  const[ShowCart, setShowCart] = useState(false);
  const MenuRef = useRef();
+ const cartRef= useRef();
  const Navigate = useNavigate();
  const dispatch = useDispatch();
  
@@ -45,13 +46,12 @@ const Menu = () => {
 
 //  MenuRef function start here 
  useEffect(() => {
-      window.addEventListener( 'click' , (e) => {
-        if(!MenuRef.current.contains(e.target)){
-          setShowAccount(false);
-          setShowCart(false);
-          setShowCategories(false);
-        }
-      });
+   window.addEventListener("click", (e) => {
+     if (!MenuRef.current.contains(e.target)) {
+       setShowAccount(false);
+       setShowCategories(false);
+     }
+   });
  },[]);
 
  //add cart item
@@ -65,7 +65,12 @@ const HandleViewCart = () => {
 useEffect(() => {
   dispatch(GetTotal());
 },[dispatch,carItem])
+//HandleViewCart function start here
 
+// Handleremove function start here 
+const Handleremove = (item) =>{
+  dispatch(removeCaritem(item))
+};
 
 
   return (
@@ -178,7 +183,7 @@ useEffect(() => {
               </div>
               {ShowCart && (
                 <div className="absolute right-10 top-44 z-10 border-2 border-FooterColor bg-white transition-all">
-                  <div className="z-0 h-[50vh] overflow-scroll bg-MenuBgColor px-8">
+                  <div ref={cartRef} className="z-0 h-[50vh] overflow-scroll bg-MenuBgColor px-8">
                     {carItem?.map((item) => (
                       <div className="flex items-center gap-x-8 py-5 ">
                         <div>
@@ -202,7 +207,7 @@ useEffect(() => {
                               : "$44.00"}
                           </p>
                         </div>
-                        <div>
+                        <div onClick={()=> Handleremove(item)}>
                           <RxCross2 />
                         </div>
                       </div>

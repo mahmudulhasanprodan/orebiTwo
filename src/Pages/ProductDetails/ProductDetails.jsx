@@ -40,7 +40,6 @@ useEffect(() => {
 
 const HandlecarItem = () =>{
   dispatch(addtoCart(FeatcherData));
-  navigate("/cart");
 };
  
 
