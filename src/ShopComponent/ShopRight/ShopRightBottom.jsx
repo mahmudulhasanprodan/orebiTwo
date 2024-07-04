@@ -23,10 +23,6 @@ useEffect(() => {
 const {data, status} = useSelector((state) => state.products);
 
 
-
-
-
-
 useEffect(() => {
   if(status.payload === "IDLE"){
     setAllData(data.payload.products);
@@ -44,7 +40,8 @@ useEffect(() => {
  const HandleCart = (item) => {
   dispatch(addtoCart(item));
  };
-
+ 
+console.log(AllData);
   return (
     <>
       <div>

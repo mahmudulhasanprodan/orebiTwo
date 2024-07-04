@@ -1,6 +1,8 @@
 import React from 'react'
 
 const ProductDetailsTop = ({FeatcherDataTop}) => {
+
+  console.log(FeatcherDataTop.products);
   return (
     <>  
       <div className="py-10">

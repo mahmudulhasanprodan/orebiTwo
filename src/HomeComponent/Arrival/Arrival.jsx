@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ArrivalCommon from '../../CommonComponent/ArrivalCommon/ArrivalCommon'
 import Button from '../../CommonComponent/Button/Button'
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import Loading from '../../CommonComponent/Loading/Loading';
+import { useSelector,useDispatch } from 'react-redux';
+import { addtoCart } from '../../Redux/AllSlice/CartSlice/CartSlice';
+import { FetcherProduct } from '../../Redux/AllSlice/ProductSlice/ProductSlice';
+import { useParams } from 'react-router-dom';
 
 
 //Custom Arrow Function
@@ -75,8 +80,25 @@ const settings = {
 
 
 const Arrival = ({HeadingTitle, Pdata}) => {
+
+
+const dispatch = useDispatch();
 const [Alldata, setAlldata] = useState(Pdata);
 
+
+const {data,status} = useSelector((state) => (state.products))
+
+
+useEffect(() => {
+  if(status.payload === "IDLE"){
+    setAlldata(Pdata);
+  }
+},[status.payload,data.payload])
+
+// handleCart function start here 
+const handleCart = (item) => {
+     dispatch(addtoCart(item))
+};
 
   return (
     <>
@@ -89,13 +111,15 @@ const [Alldata, setAlldata] = useState(Pdata);
           </div>
             {/* <div className="flex justify-between"> */}
           <Slider {...settings}>
-              {Alldata?.map((item) => (
+            {status.payload === "LOADING" ? (<Loading />) : (
+               Alldata?.map((item) => (
                 <div key={item.id}>
                   <ArrivalCommon
+                    AddTocart={() => handleCart(item)}
                     ProductName={item.title}
                     Price={item.price}
-                    Image={item.img}
-                    Colorvarient={item.color}
+                    Image={item.thumbnail}
+                    Colorvarient={item.brand}
                     baze={
                       item.baze === true ? (
                         <Button
@@ -106,7 +130,9 @@ const [Alldata, setAlldata] = useState(Pdata);
                     }
                   />
                 </div>
-              ))}
+              ))
+            )}
+             
           </Slider>
             {/* </div> */}
         </div>

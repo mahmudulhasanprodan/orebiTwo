@@ -40,8 +40,8 @@ const ArrivalCommon = ({Image, Colorvarient, baze, ProductName,Price,ProductId,A
               </span>
             </Flex>
             <div  onClick={AddTocart}>
-            <Flex className={"right-3 items-center justify-end gap-x-3"}>
-              <h2 className="font-DMsans text-MainfontColor">Add to Cart</h2>
+            <Flex className={"right-3 items-center justify-end gap-x-3 active:text-blue-400"}>
+              <h2 className="font-DMsans text-MainfontColor active:text-blue-400">Add to Cart</h2>
               <span>
                 <FaShoppingCart />
               </span>
